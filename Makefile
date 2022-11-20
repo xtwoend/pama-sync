@@ -1,5 +1,5 @@
 # You have to define the values in {}
-APP_NAME=mssql-swoole
+APP_NAME=pama-sync
 VERSION=1.0
 DOCKER_REPO=xtwoend
 
