@@ -11,11 +11,12 @@ declare(strict_types=1);
  */
 namespace App\Exception\Handler;
 
-use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
-use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use Hyperf\Utils\Codec\Json;
+use Psr\Http\Message\ResponseInterface;
+use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\ExceptionHandler\ExceptionHandler;
 
 class AppExceptionHandler extends ExceptionHandler
 {
@@ -27,7 +28,23 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        return $response->withHeader('Server', 'Hyperf')->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
+
+        $err_code = $throwable->getCode();
+
+        $payload = [
+            'error' => $err_code,
+            'message' => $throwable->getMessage()
+        ];
+
+        if (config('app_env') == 'dev') {
+            $payload['throw'] = $throwable->getTrace();
+        }
+
+        return $response
+            ->withStatus(500)
+            ->withHeader('Server', 'Pama')
+            ->withHeader('Content-Type', 'application/json')
+            ->withBody(new SwooleStream(Json::encode($payload)));
     }
 
     public function isValid(Throwable $throwable): bool
