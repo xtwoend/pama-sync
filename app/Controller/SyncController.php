@@ -58,9 +58,9 @@ class SyncController
         $total = $site->holes()->count();
 
         return $response->json([
-            'success' => true, 
-            'message' => 'Success sync data', 
-            'total' => $total
+            'success'   => true, 
+            'message'   => 'Success sync data', 
+            'total'     => $total
         ]);
     }
 }
