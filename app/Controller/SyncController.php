@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Hole;
+use App\Model\P2h;
 use App\Model\Site;
-use App\Model\Downtime;
-use App\Model\BinCapacity;
-use App\Model\Pemeriksaan;
+use App\Model\Loading;
+use App\Model\Activity;
+use App\Model\Charging;
 use Hyperf\Utils\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Guzzle\ClientFactory;
@@ -58,11 +58,11 @@ class SyncController
         ]);
 
         foreach($data as $row) {
-            Hole::updateOrCreate([
+            Charging::updateOrCreate([
                 'site_key' => $site->id,
                 'hole_code' => $row['hole_code']
             ], [
-                'truck_id' => $truckId,
+                'truck_id' => (string) $truckId,
                 'site_id' => $meta['site'],
                 'deep' => $row['deep'],
                 'volume' => $row['volume'],
@@ -88,7 +88,7 @@ class SyncController
         $action = $request->input('action');
         $url = $request->input('url');
 
-        if(! in_array($action, ['charging', 'p2h', 'downtime', 'bincapacity']))
+        if(! in_array($action, ['charging', 'p2h', 'activity', 'bincapacity']))
         {
             return $response->json([
                 'success' => false,
@@ -98,7 +98,7 @@ class SyncController
 
         $result = null;
         if($action == 'charging') {
-            $data = Hole::all();
+            $data = Charging::all();
 
             $result = $this->client->post($url, [
                 'headers' => [
@@ -114,7 +114,7 @@ class SyncController
 
         if($action == 'p2h') {
 
-            $data = Pemeriksaan::all();
+            $data = P2h::all();
             $result = $this->client->post($url, [
                 'headers' => [
                     'Document-Type' => 'application/json',
@@ -127,8 +127,8 @@ class SyncController
             ]);
         }
 
-        if($action == 'downtime') {
-            $data = Downtime::all();
+        if($action == 'activity') {
+            $data = Activity::all();
             $result = $this->client->post($url, [
                 'headers' => [
                     'Document-Type' => 'application/json',
@@ -141,8 +141,8 @@ class SyncController
             ]);
         }
 
-        if($action == 'bincapacity') {
-            $data = BinCapacity::all();
+        if($action == 'loading') {
+            $data = Loading::all();
             $result = $this->client->post($url, [
                 'headers' => [
                     'Document-Type' => 'application/json',

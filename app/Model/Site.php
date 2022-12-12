@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use App\Model\Hole;
 use App\Model\Model;
 
 class Site extends Model
@@ -19,6 +18,6 @@ class Site extends Model
 
     public function holes()
     {
-        return $this->hasMany(Hole::class, 'site_key');
+        return $this->hasMany(Charging::class, 'site_key');
     }
 }

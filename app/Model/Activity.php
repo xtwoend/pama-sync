@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Downtime extends Model
+class Activity extends Model
 {
     protected $table = 'tbl_downtimereport';
 

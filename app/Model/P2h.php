@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Pemeriksaan extends Model
+class P2h extends Model
 {
     protected $table = 'tbl_p2h_pemeriksaan';
 
