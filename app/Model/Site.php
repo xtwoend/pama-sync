@@ -7,7 +7,7 @@ use App\Model\Model;
 
 class Site extends Model
 {
-    protected $table = 'sites';
+    protected $table = 'tbl_sites';
 
     protected $fillable = [
         'site', 

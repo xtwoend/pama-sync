@@ -6,7 +6,12 @@ namespace App\Controller;
 
 use App\Model\Hole;
 use App\Model\Site;
+use App\Model\Downtime;
+use App\Model\BinCapacity;
+use App\Model\Pemeriksaan;
+use Hyperf\Utils\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Guzzle\ClientFactory;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -18,6 +23,15 @@ class SyncController
 {
     #[Inject]
     protected ValidatorFactoryInterface $validator;
+
+    #[Inject]
+    protected ClientFactory $factory;
+
+    protected $client;
+
+    public function __construct() {
+        $this->client = $this->factory->create();
+    }
 
     #[RequestMapping(methods: "POST", path: "/sync/{truckId}")]
     public function receive($truckId, RequestInterface $request, ResponseInterface $response)
@@ -64,6 +78,83 @@ class SyncController
             'message'   => 'Success sync data',
             'total'     => $total,
             'data'      => $dataholes,
+        ]);
+    }
+
+    public function send(RequestInterface $request, ResponseInterface $response)
+    {
+        $action = $request->input('action');
+        $url = $request->input('url');
+
+        if(! in_array($action, ['charging', 'p2h', 'downtime', 'bincapacity']))
+        {
+            return $response->json([
+                'success' => false,
+                'message' => 'Action not found'
+            ]);
+        }
+
+        $result = null;
+        if($action == 'charging') {
+            $data = Hole::all();
+
+            $result = $this->client->post($url, [
+                'headers' => [
+                    'Document-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'json' => $data,
+            ]);
+        }
+
+        if($action == 'p2h') {
+
+            $data = Pemeriksaan::all();
+            $result = $this->client->post($url, [
+                'headers' => [
+                    'Document-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'json' => $data,
+            ]);
+        }
+
+        if($action == 'downtime') {
+            $data = Downtime::all();
+            $result = $this->client->post($url, [
+                'headers' => [
+                    'Document-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'json' => $data,
+            ]);
+        }
+
+        if($action == 'bincapacity') {
+            $data = BinCapacity::all();
+            $result = $this->client->post($url, [
+                'headers' => [
+                    'Document-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'json' => $data,
+            ]);
+        }
+
+        if(is_null($result) || $result->getStatusCode() != 200) {
+            return $response->json([
+                'success' => false,
+                'message' => 'data not sending'
+            ]);
+        }
+
+        $data = (string) $result->getBody();
+        $json = Json::decode($data);
+
+        return $response->json([
+            'success' => true,
+            'message' => 'success response',
+            'response' => $json
         ]);
     }
 }

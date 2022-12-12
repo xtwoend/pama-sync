@@ -21,7 +21,7 @@
         "hyperf/constants": "~2.2.0",
         "hyperf/db-connection": "~2.2.0",
         "hyperf/framework": "~2.2.0",
-        "hyperf/guzzle": "~2.2.0",
+        "hyperf/guzzle": "^2.2",
         "hyperf/http-server": "~2.2.0",
         "hyperf/logger": "~2.2.0",
         "hyperf/memory": "~2.2.0",

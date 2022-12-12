@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3bf2c0cccb76d0ff01e46238718efaa",
+    "content-hash": "cd9817f2b3d55a8b102eb8aad8137f3e",
     "packages": [
         {
             "name": "chadw/hyperf-database-sqlserver",
