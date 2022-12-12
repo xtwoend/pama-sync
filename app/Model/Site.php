@@ -19,6 +19,6 @@ class Site extends Model
 
     public function holes()
     {
-        return $this->hasMany(Hole::class, 'site_id');
+        return $this->hasMany(Hole::class, 'site_key');
     }
 }
