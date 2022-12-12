@@ -81,7 +81,8 @@ class SyncController
         ]);
     }
 
-    public function send(RequestInterface $request, ResponseInterface $response)
+    #[RequestMapping(methods: "POST", path: "/send/{truckId}")]
+    public function send($truckId, RequestInterface $request, ResponseInterface $response)
     {
         $action = $request->input('action');
         $url = $request->input('url');
@@ -103,7 +104,10 @@ class SyncController
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
-                'json' => $data,
+                'json' => [
+                    'truck_id' => $truckId,
+                    'data' => $data,
+                ],
             ]);
         }
 
@@ -115,7 +119,10 @@ class SyncController
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
-                'json' => $data,
+                'json' => [
+                    'truck_id' => $truckId,
+                    'data' => $data,
+                ],
             ]);
         }
 
@@ -126,7 +133,10 @@ class SyncController
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
-                'json' => $data,
+                'json' => [
+                    'truck_id' => $truckId,
+                    'data' => $data,
+                ],
             ]);
         }
 
@@ -137,7 +147,10 @@ class SyncController
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
-                'json' => $data,
+                'json' => [
+                    'truck_id' => $truckId,
+                    'data' => $data,
+                ],
             ]);
         }
 
