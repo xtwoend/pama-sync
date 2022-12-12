@@ -8,6 +8,7 @@ class Hole extends Model
 
     protected $fillable = [
         'site_id', 
+        'site_key',
         'truck_id',
         'hole_code', 
         'deep',
@@ -47,6 +48,6 @@ class Hole extends Model
     
     public function site()
     {
-        return $this->belongsTo(Site::class, 'site_id');
+        return $this->belongsTo(Site::class, 'site_key');
     }
 }

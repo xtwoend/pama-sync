@@ -59,10 +59,11 @@ class SyncController
 
         foreach($data as $row) {
             Hole::updateOrCreate([
-                'site_id' => (string) $site->site,
+                'site_key' => $site->id,
                 'hole_code' => $row['hole_code']
             ], [
                 'truck_id' => $truckId,
+                'site_id' => $meta['site'],
                 'deep' => $row['deep'],
                 'volume' => $row['volume'],
                 'condition' => $row['condition']
