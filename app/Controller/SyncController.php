@@ -88,7 +88,7 @@ class SyncController
         $action = $request->input('action');
         $url = $request->input('url');
 
-        if(! in_array($action, ['charging', 'p2h', 'activity', 'bincapacity']))
+        if(! in_array($action, ['charging', 'p2h', 'activity', 'loading']))
         {
             return $response->json([
                 'success' => false,
@@ -170,5 +170,11 @@ class SyncController
             'message' => 'success response',
             'response' => $json
         ]);
+    }
+
+    #[RequestMapping(methods: "POST", path: "/pama/dummy/url")]
+    public function dummy(RequestInterface $request, ResponseInterface $response)
+    {
+        return $response->json($request->all());
     }
 }
