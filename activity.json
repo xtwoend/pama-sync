@@ -1,0 +1,40 @@
+{
+	"success": true,
+	"message": "success response",
+	"response": {
+		"truck_id": "AM027",
+		"data": [{
+			"id": 4,
+			"operator": "KIAP11592",
+			"code": "D06",
+			"start_time": "1900-01-01 08:06:02.000",
+			"finish_time": "1900-01-01 09:05:01.000",
+			"duration": "00:58:59.0000000",
+			"methode": "Manual"
+		}, {
+			"id": 5,
+			"operator": "KIAP18827",
+			"code": "D01",
+			"start_time": "2022-12-12 08:11:00.000",
+			"finish_time": "2022-12-12 08:13:22.000",
+			"duration": "00:02:22.0000000",
+			"methode": "Automatic"
+		}, {
+			"id": 6,
+			"operator": "KIAP18827",
+			"code": "D06",
+			"start_time": "1900-01-01 07:05:01.000",
+			"finish_time": "1900-01-01 08:08:01.000",
+			"duration": "01:03:00.0000000",
+			"methode": "Manual"
+		}, {
+			"id": 7,
+			"operator": "Amanu",
+			"code": "D01",
+			"start_time": "2022-12-12 16:51:21.000",
+			"finish_time": "2022-12-12 16:53:21.000",
+			"duration": "00:02:00.0000000",
+			"methode": "Automatic"
+		}]
+	}
+}
