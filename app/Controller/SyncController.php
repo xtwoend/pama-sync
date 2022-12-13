@@ -98,8 +98,8 @@ class SyncController
 
         $result = null;
         if($action == 'charging') {
-            $data = Charging::all();
-
+            // $data = Charging::all();
+            $data = [];
             $result = $this->client->post($url, [
                 'headers' => [
                     'Document-Type' => 'application/json',

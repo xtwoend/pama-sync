@@ -41,7 +41,7 @@ class AppExceptionHandler extends ExceptionHandler
         }
 
         return $response
-            ->withStatus(500)
+            ->withStatus(200)
             ->withHeader('Server', 'Pama')
             ->withHeader('Content-Type', 'application/json')
             ->withBody(new SwooleStream(Json::encode($payload)));
