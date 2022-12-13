@@ -17,6 +17,6 @@ docker exec -it %APP_NAME% sh
 GOTO END
 :build
 docker build --no-cache -t %APP_NAME% .
-docker run -d --env-file ./.env -p %PORT%:%DIST_PORT% --name="%APP_NAME%" %APP_NAME%
+docker run -d --restart --env-file ./.env -p %PORT%:%DIST_PORT% --name="%APP_NAME%" %APP_NAME%
 :END
 pause
