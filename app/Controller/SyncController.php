@@ -165,15 +165,15 @@ class SyncController
         $data = (string) $result->getBody();
         $json = Json::decode($data);
 
-        // if($action == 'charging') {
-        //     Charging::truncate();
-        // }elseif($action == 'p2h') {
-        //     P2h::truncate();
-        // }elseif($action == 'activity') {
-        //     Activity::truncate();
-        // }elseif($action == 'loading') {
-        //     Loading::truncate();
-        // }
+        if($action == 'charging') {
+            Charging::delete();
+        }elseif($action == 'p2h') {
+            P2h::delete();
+        }elseif($action == 'activity') {
+            Activity::delete();
+        }elseif($action == 'loading') {
+            Loading::delete();
+        }
 
         return $response->json([
             'success' => true,
