@@ -9,6 +9,7 @@ use App\Model\Site;
 use App\Model\Loading;
 use App\Model\Activity;
 use App\Model\Charging;
+use Hyperf\DbConnection\Db;
 use Hyperf\Utils\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Guzzle\ClientFactory;
@@ -166,13 +167,13 @@ class SyncController
         $json = Json::decode($data);
 
         if($action == 'charging') {
-            Charging::delete();
+            Db::table((new Charging)->getTable())->delete();
         }elseif($action == 'p2h') {
-            P2h::delete();
+            Db::table((new P2h)->getTable())->delete();
         }elseif($action == 'activity') {
-            Activity::delete();
+            Db::table((new Activity)->getTable())->delete();
         }elseif($action == 'loading') {
-            Loading::delete();
+            Db::table((new Loading)->getTable())->delete();
         }
 
         return $response->json([
