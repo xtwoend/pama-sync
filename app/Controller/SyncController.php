@@ -102,6 +102,9 @@ class SyncController
             $data = Charging::where('truck_id', $truckId)->get();
             // $data = [];
             $result = $this->client->post($url, [
+                'query' => [
+                    'key' => env('KIDE_KEY'),
+                ],
                 'headers' => [
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
@@ -117,6 +120,9 @@ class SyncController
 
             $data = P2h::all();
             $result = $this->client->post($url, [
+                'query' => [
+                    'key' => env('KIDE_KEY'),
+                ],
                 'headers' => [
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
@@ -131,6 +137,9 @@ class SyncController
         if($action == 'activity') {
             $data = Activity::all();
             $result = $this->client->post($url, [
+                'query' => [
+                    'key' => env('KIDE_KEY'),
+                ],
                 'headers' => [
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
@@ -145,6 +154,9 @@ class SyncController
         if($action == 'loading') {
             $data = Loading::all();
             $result = $this->client->post($url, [
+                'query' => [
+                    'key' => env('KIDE_KEY'),
+                ],
                 'headers' => [
                     'Document-Type' => 'application/json',
                     'Accept' => 'application/json'
