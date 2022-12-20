@@ -1,0 +1,5 @@
+endpoint nya: 
+1. http://10.2.155.218:9000/api/ServiceDigiAnfo/SyncActivity
+2. http://10.2.155.218:9000/api/ServiceDigiAnfo/SyncCharging
+3. http://10.2.155.218:9000/api/ServiceDigiAnfo/SyncLoading
+4. http://10.2.155.218:9000/api/ServiceDigiAnfo/SyncP2h
