@@ -55,7 +55,8 @@ class SyncController
             'ewacs_location' => $meta['ewacs_location']
         ], [
             'burden' => $meta['burden'] ?? 0,
-            'spacing' => $meta['spacing'] ?? 0
+            'spacing' => $meta['spacing'] ?? 0,
+            'plan_pf' => $meta['plan_pf'] ?? 0
         ]);
 
         foreach($data as $row) {

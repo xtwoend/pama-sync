@@ -13,7 +13,8 @@ class Site extends Model
         'pit', 
         'ewacs_location', 
         'burden', 
-        'spacing'
+        'spacing',
+        'plan_pf'
     ];
 
     public function holes()
