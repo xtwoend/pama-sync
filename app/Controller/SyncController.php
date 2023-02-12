@@ -170,7 +170,7 @@ class SyncController
             ]);
         }
 
-        if(is_null($result) || $result->getStatusCode() != 200) {
+        if(is_null($result) || ! in_array($result->getStatusCode(), [200, 201])) {
             return $response->json([
                 'success' => false,
                 'message' => 'data not sending'
