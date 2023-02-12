@@ -14,7 +14,8 @@ class Site extends Model
         'ewacs_location', 
         'burden', 
         'spacing',
-        'plan_pf'
+        'plan_pf',
+        'diameter'
     ];
 
     public function holes()

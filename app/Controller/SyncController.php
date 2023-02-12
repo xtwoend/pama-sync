@@ -56,7 +56,8 @@ class SyncController
         ], [
             'burden' => $meta['burden'] ?? 0,
             'spacing' => $meta['spacing'] ?? 0,
-            'plan_pf' => $meta['plan_pf'] ?? 0
+            'plan_pf' => $meta['plan_pf'] ?? 0,
+            'diameter' => $meta['diameter'] ?? 0,
         ]);
 
         foreach($data as $row) {
