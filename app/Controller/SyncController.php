@@ -187,7 +187,7 @@ class SyncController
         }elseif($action == 'activity') {
             Db::table((new Activity)->getTable())->delete();
         }elseif($action == 'loading') {
-            Db::table((new Loading)->getTable())->delete();
+            // Db::table((new Loading)->getTable())->delete();
         }
 
         return $response->json([
