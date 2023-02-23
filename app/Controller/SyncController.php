@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\P2h;
+use App\Model\Rpm;
 use App\Model\Site;
 use App\Model\Loading;
 use App\Model\Activity;
@@ -170,6 +171,23 @@ class SyncController
             ]);
         }
 
+        if($action == 'rpm') {
+            $data = Rpm::all();
+            $result = $this->client->post($url, [
+                'query' => [
+                    'key' => env('KIDE_KEY'),
+                ],
+                'headers' => [
+                    'Document-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'json' => [
+                    'truck_id' => $truckId,
+                    'data' => $data,
+                ],
+            ]);
+        }
+
         if(is_null($result) || ! in_array($result->getStatusCode(), [200, 201])) {
             return $response->json([
                 'success' => false,
@@ -188,6 +206,8 @@ class SyncController
             Db::table((new Activity)->getTable())->delete();
         }elseif($action == 'loading') {
             // Db::table((new Loading)->getTable())->delete();
+        }elseif($action == 'rpm') {
+            Db::table((new Rpm)->getTable())->delete();
         }
 
         return $response->json([
