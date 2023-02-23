@@ -4,6 +4,6 @@ namespace App\Model;
 
 class Rpm extends Model
 {
-    protected $table = '';
+    protected $table = 'tbl_rpm';
 
 }
