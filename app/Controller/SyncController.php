@@ -171,7 +171,7 @@ class SyncController
             ]);
         }
 
-        if($action == 'motor') {
+        if($action == 'rpm') {
             $data = Rpm::all();
             $result = $this->client->post($url, [
                 'query' => [
@@ -206,7 +206,7 @@ class SyncController
             Db::table((new Activity)->getTable())->delete();
         }elseif($action == 'loading') {
             // Db::table((new Loading)->getTable())->delete();
-        }elseif($action == 'motor') {
+        }elseif($action == 'rpm') {
             Db::table((new Rpm)->getTable())->delete();
         }
 
