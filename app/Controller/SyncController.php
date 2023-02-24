@@ -155,7 +155,7 @@ class SyncController
         }
 
         if($action == 'loading') {
-            $data = Loading::all();
+            $data = Loading::whereDate('datetime', Carbon::now()->format('Y-m-d'))->get();
             $result = $this->client->post($url, [
                 'query' => [
                     'key' => env('KIDE_KEY'),
