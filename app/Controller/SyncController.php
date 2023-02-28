@@ -103,7 +103,9 @@ class SyncController
 
         $result = null;
         if($action == 'charging') {
-            $data = Charging::where('truck_id', $truckId)->get();
+            $data = Charging::select('tbl_chargingreport.*', 'tbl_sites.pit', 'tbl_sites.ewacs_location', 'tbl_sites.burden', 'tbl_sites.spacing', 'tbl_sites.diameter')
+                ->leftJoin('tbl_sites', 'tbl_chargingreport.site_key', '=', 'tbl_sites.id')
+                ->where('truck_id', $truckId)->get();
             // $data = [];
             $result = $this->client->post($url, [
                 'query' => [
